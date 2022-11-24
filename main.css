@@ -1,0 +1,117 @@
+body {
+  background: #d9ffc5;
+}
+
+.map {
+  position:relative;
+  background-image: url(map.jpg);
+  width: calc(192px * 4);
+  height: calc(144px * 4);
+  background-size: 100%;
+  margin: 1em auto 0 auto;
+}
+
+.pixel {
+  image-rendering: pixelated;
+}
+
+.character {
+  position: absolute;
+  background-image: url(character.png);
+  width: 30px;
+  height: 90px;
+  background-size: 100%;
+}
+
+.item {
+  cursor: pointer;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background-size: 400%;
+}
+
+.main {
+  left: 280px;
+  top: 150px;
+}
+
+.item1 {
+  left: 100px;
+  top: 405px;
+  background-image: url(sword.png);
+  background-size: 100%;
+  width: 150px;
+  height: 70px;
+}
+.item1.collected {
+  left: 250px;
+  top: 210px;
+}
+
+.item2 {
+  left: 570px;
+  top: 365px;
+ background-image: url(shield.png);
+ background-size: 100%;
+ width: 60px;
+ height: 60px;
+}
+.item2.collected {
+  left: 300px;
+  top: 250px;
+}
+
+.item3 {
+  left: 370px;
+  top: 500px;
+  background-image: url(helmet.png);
+ background-size: 100%;
+ width: 40px;
+ height: 50px;
+
+}
+.item3.collected {
+  left: 370px;
+  top: 210px;
+}
+
+.item4 {
+  left: 580px;
+  top: 140px;
+ background-image: url(gold.png);
+ background-size: 100%;
+ width: 50px;
+ height: 40px;
+}
+.item4.collected {
+  left: 345px;
+  top: 211px;
+}
+
+
+.feedback {
+  display: flex;
+  justify-content: center;
+}
+.feedback p {
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+  background: #000;
+  color: #fff;
+  padding: 1em;
+  margin: 0;
+  font-size: 1.1em;
+}
+
+#spinner   {  
+           
+  animation: spin 1s linear infinite;
+  color: red;
+}
+
+@keyframes spin {
+  100% {
+      transform: rotate(360deg);
+  }
+}
