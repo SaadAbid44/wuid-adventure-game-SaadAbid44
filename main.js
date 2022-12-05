@@ -39,7 +39,7 @@ var scenarios = [
 
      "required": ["FourItems"],
      "bypass": [],
-     "text": "You found the gold.!",
+     "text": "You found the gold!",
   
   },  
 ]
@@ -60,7 +60,7 @@ items.forEach(item => {
   item.addEventListener("click", () => {
      item.classList.toggle("collected");
      toggleStoryPoint( item.getAttribute("story-point") )
-     refreshScenario();
+   //   refreshScenario();
   })
 });
 
@@ -117,8 +117,4 @@ function refreshScenario() {
   })
   
   document.querySelector(".text").textContent = scenario.text;
-}
-
-function startGame() {
-  console.log('start game');
 }
