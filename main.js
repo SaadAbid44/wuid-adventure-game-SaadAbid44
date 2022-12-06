@@ -1,4 +1,6 @@
-var scenarios = [
+// Concept ideation from a friend.
+
+var scenarios = [ 
   {
  
      "required": [],
@@ -43,6 +45,7 @@ var scenarios = [
   
   },  
 ]
+
 
 var computedStoryPoints = {
   "requires": [ "Sword", "Shield", "Helmet", "Gold" ],
