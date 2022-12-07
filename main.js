@@ -47,6 +47,7 @@ var scenarios = [
 ]
 
 
+
 var computedStoryPoints = {
   "requires": [ "Sword", "Shield", "Helmet", "Gold" ],
   "quantities": [
@@ -56,6 +57,12 @@ var computedStoryPoints = {
      [4, "FourItems"]
   ]
 }
+
+
+
+document.getElementById("coin").innerHTML =
+Math.floor(Math.random()*10);
+alert("You have found" + Math.random());
 
 //Functionality
 var items = document.querySelectorAll(".item");
