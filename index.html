@@ -13,10 +13,10 @@
     <p id="p2">Achieved:</p>
     <p id="score"></p>
     <p id="high"></p>
-    <button id="btn_stop" >Stop</button>
-    <p id="end_msg"></p>
+    <a href="Win.html" id="stop" >Stop</a>
+    <p id="end"></p>
     <canvas width="400" height="400" id="game"></canvas>
-    
+
     <!-- script starts here -->
 
     <script>
@@ -162,21 +162,6 @@
       // start
       requestAnimationFrame(loop);
       
-      
-      
-      
-      function myFunction() {
-        document.getElementById('end_msg').innerHTML="";
-        alert('Press confirm to continue');
-      }
-      
-      //stop
-      $(document).ready(function(){
-          $('#btn_stop').click(function(){
-            document.getElementById('end_msg').innerHTML="Game stoped by player" ;
-            setTimeout(myFunction, 1000);	
-          });
-        });
       </script>
   </body>
   </html>
