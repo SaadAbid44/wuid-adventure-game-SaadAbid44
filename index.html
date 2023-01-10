@@ -20,19 +20,19 @@
     <!-- script starts here -->
 
     <script>
-    var canvas = document.getElementById('game');
-      var context = canvas.getContext('2d');
-      var grid = 16;
-      var count = 0;
-      var score=0;
+    let canvas = document.getElementById('game');
+    let context = canvas.getContext('2d');
+    let grid = 16;
+    let count = 0;
+    let score=0;
       
       if(localStorage.score){
         document.getElementById('score').innerHTML=localStorage.score; 
       }
       
-      var max=0;  
+      let max=0;  
       
-      var snake = {
+      let snake = {
         x: 160,
         y: 160,
         
@@ -45,7 +45,7 @@
         
         maxCells: 4
       };
-      var apple = {
+      let apple = {
         x: 320,
         y: 320
       };
