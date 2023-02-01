@@ -1,159 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game</title>
-  <link rel="stylesheet" href="game.css">
-  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game</title>
+    <link rel="stylesheet" href="game.css" />
+  </head>
   <body>
     <p id="p1">Score:</p>
     <p id="p2">Achieved:</p>
     <p id="score"></p>
     <p id="high"></p>
-    <a href="Win.html" id="stop" >Stop</a>
+    <a href="Win.html" id="stop">Stop</a>
     <p id="end"></p>
-    <canvas width="400" height="400" id="game"></canvas>
+    <canvas width="500" height="500" id="game"></canvas>
 
     <!-- script starts here -->
 
     <script>
-    let canvas = document.getElementById('game');
-    let context = canvas.getContext('2d');
-    let grid = 16;
-    let count = 0;
-    let score=0;
-      
-      if(localStorage.score){
-        document.getElementById('score').innerHTML=localStorage.score; 
+      let canvas = document.getElementById("game");
+      let context = canvas.getContext("2d");
+      let grid = 16;
+      let count = 0;
+      let score = 0;
+
+      if (localStorage.score) {
+        document.getElementById("score").innerHTML = localStorage.score;
       }
-      
-      let max=0;  
-      
+
+      let max = 0;
+
       let snake = {
         x: 160,
         y: 160,
-        
-      
+
         dx: grid,
         dy: 0,
-        
-      
+
         cells: [],
-        
-        maxCells: 4
+
+        maxCells: 4,
       };
       let apple = {
         x: 320,
-        y: 320
+        y: 320,
       };
-      
-      
+
       function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
       }
-      
-      
+
       function loop() {
-        
         requestAnimationFrame(loop);
-        
+
         if (++count < 10) {
           return;
         }
         count = 0;
-        context.clearRect(0,0,canvas.width,canvas.height);
-        
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
         snake.x += snake.dx;
         snake.y += snake.dy;
-       
+
         if (snake.x < 0) {
           snake.x = canvas.width - grid;
-        }
-        else if (snake.x >= canvas.width) {
+        } else if (snake.x >= canvas.width) {
           snake.x = 0;
         }
-        
-        
+
         if (snake.y < 0) {
           snake.y = canvas.height - grid;
-        }
-        else if (snake.y >= canvas.height) {
+        } else if (snake.y >= canvas.height) {
           snake.y = 0;
         }
-        
-        snake.cells.unshift({x: snake.x, y: snake.y});
-        
+
+        snake.cells.unshift({ x: snake.x, y: snake.y });
+
         if (snake.cells.length > snake.maxCells) {
           snake.cells.pop();
         }
-      
-        context.fillStyle = 'red';
-        context.fillRect(apple.x, apple.y, grid-1, grid-1);
-       
-        context.fillStyle = 'green';
-        snake.cells.forEach(function(cell, index) {
-          
-          
-          context.fillRect(cell.x, cell.y, grid-1, grid-1);  
-        
+
+        context.fillStyle = "blue";
+        context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
+
+        context.fillStyle = "red";
+        snake.cells.forEach(function (cell, index) {
+          context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
+
           if (cell.x === apple.x && cell.y === apple.y) {
             snake.maxCells++;
-          score+=1;
-          
-          localStorage.setItem('score',score);
-          
-          document.getElementById('score').innerHTML=score;
-        
+            score += 1;
+
+            localStorage.setItem("score", score);
+
+            document.getElementById("score").innerHTML = score;
+
             apple.x = getRandomInt(0, 25) * grid;
             apple.y = getRandomInt(0, 25) * grid;
           }
-          for (var i = index + 1; i < snake.cells.length; i++)
-        {
-            
-            if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) 
-         { 
-         
-            if(score>max)
-            {
-             max=score;
-            }
-            snake.x = 160;
+          for (var i = index + 1; i < snake.cells.length; i++) {
+            if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+              if (score > max) {
+                max = score;
+              }
+              snake.x = 160;
               snake.y = 160;
               snake.cells = [];
               snake.maxCells = 4;
               snake.dx = grid;
               snake.dy = 0;
-      
+
               apple.x = getRandomInt(0, 25) * grid;
               apple.y = getRandomInt(0, 25) * grid;
-            document.getElementById('high').innerHTML=max;
+              document.getElementById("high").innerHTML = max;
             }
           }
-        }  
-        );  
+        });
       }
-      
-      document.addEventListener('keydown', function(e) {
-      
-        // left 
+
+      document.addEventListener("keydown", function (e) {
+        // left
         if (e.which === 37 && snake.dx === 0) {
           snake.dx = -grid;
           snake.dy = 0;
         }
-        // up 
+        // up
         else if (e.which === 38 && snake.dy === 0) {
           snake.dy = -grid;
           snake.dx = 0;
         }
-        // right 
+        // right
         else if (e.which === 39 && snake.dx === 0) {
           snake.dx = grid;
           snake.dy = 0;
         }
-        // down 
+        // down
         else if (e.which === 40 && snake.dy === 0) {
           snake.dy = grid;
           snake.dx = 0;
@@ -161,7 +143,6 @@
       });
       // start
       requestAnimationFrame(loop);
-      
-      </script>
+    </script>
   </body>
-  </html>
+</html>
