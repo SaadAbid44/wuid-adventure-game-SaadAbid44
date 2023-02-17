@@ -1,32 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="main.css">
-  
-  <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game</title>
+    <link rel="stylesheet" href="game.css" />
+  </head>
+  <body>
+    <p id="p1">Score:</p>
+    <p id="p2">Achieved:</p>
+    <p id="score"></p>
+    <p id="high"></p>
+    <a href="Win.html" id="stop">Stop</a>
+    <p id="end"></p>
+    <canvas width="500" height="500" id="game"></canvas>
 
+    <!-- script starts here -->
 
+    <script>
+      let canvas = document.getElementById("game");
+      let context = canvas.getContext("2d");
+      let grid = 16;
+      let count = 0;
+      let score = 0;
 
-  <div class="pixel map">
+      if (localStorage.score) {
+        document.getElementById("score").innerHTML = localStorage.score;
+      }
 
-    <div class="pixel character main"></div>
-    <!-- Toys -->
-    <div class="pixel item item1" story-point="Sword"></div>
-    <div class="pixel item item2" story-point="Shield"></div>
-    <div class="pixel item item3" story-point="Helmet"></div>
-    <div class="pixel item item4" story-point="Gold"></div>
-    
-  </div>
-  
-  <div class="feedback">
-    <p class="text">Collect the Items.</p>
-    <script src="main.js"></script>
-  </div>
- 
-</body>
+      let max = 0;
+
+      let snake = {
+        x: 160,
+        y: 160,
+
+        dx: grid,
+        dy: 0,
+
+        cells: [],
+
+        maxCells: 4,
+      };
+      let apple = {
+        x: 320,
+        y: 320,
+      };
+
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+
+      function loop() {
+        requestAnimationFrame(loop);
+
+        if (++count < 10) {
+          return;
+        }
+        count = 0;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        snake.x += snake.dx;
+        snake.y += snake.dy;
+
+        if (snake.x < 0) {
+          snake.x = canvas.width - grid;
+        } else if (snake.x >= canvas.width) {
+          snake.x = 0;
+        }
+
+        if (snake.y < 0) {
+          snake.y = canvas.height - grid;
+        } else if (snake.y >= canvas.height) {
+          snake.y = 0;
+        }
+
+        snake.cells.unshift({ x: snake.x, y: snake.y });
+
+        if (snake.cells.length > snake.maxCells) {
+          snake.cells.pop();
+        }
+
+        context.fillStyle = "blue";
+        context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
+
+        context.fillStyle = "red";
+        snake.cells.forEach(function (cell, index) {
+          context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
+
+          if (cell.x === apple.x && cell.y === apple.y) {
+            snake.maxCells++;
+            score += 1;
+
+            localStorage.setItem("score", score);
+
+            document.getElementById("score").innerHTML = score;
+
+            apple.x = getRandomInt(0, 25) * grid;
+            apple.y = getRandomInt(0, 25) * grid;
+          }
+
+          // searched and understood then implemented how to make the snake eat the apple and reappear them.
+
+          for (var i = index + 1; i < snake.cells.length; i++) {
+            if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+              if (score > max) {
+                max = score;
+              }
+              snake.x = 160;
+              snake.y = 160;
+              snake.cells = [];
+              snake.maxCells = 4;
+              snake.dx = grid;
+              snake.dy = 0;
+
+              apple.x = getRandomInt(0, 25) * grid;
+              apple.y = getRandomInt(0, 25) * grid;
+              document.getElementById("high").innerHTML = max;
+            }
+          }
+        });
+      }
+
+      document.addEventListener("keydown", function (e) {
+        // left
+        if (e.which === 37 && snake.dx === 0) {
+          snake.dx = -grid;
+          snake.dy = 0;
+        }
+        // up
+        else if (e.which === 38 && snake.dy === 0) {
+          snake.dy = -grid;
+          snake.dx = 0;
+        }
+        // right
+        else if (e.which === 39 && snake.dx === 0) {
+          snake.dx = grid;
+          snake.dy = 0;
+        }
+        // down
+        else if (e.which === 40 && snake.dy === 0) {
+          snake.dy = grid;
+          snake.dx = 0;
+        }
+      });
+      // start
+      requestAnimationFrame(loop);
+    </script>
+  </body>
 </html>
