@@ -10,7 +10,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("/images/pexels-snow-white-884186.jpg") no-repeat center
+  background: url("/Images/pexels-snow-white-884186.jpg") no-repeat center
     center / cover;
 }
 #scene-2 .background {
@@ -19,7 +19,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("/images/inside-cave.jpg") no-repeat center center / cover;
+  background: url("/Images/inside-cave.jpg") no-repeat center center / cover;
 }
 #scene-3 .background {
   position: absolute;
@@ -27,7 +27,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("/images/treasure.jpg") no-repeat center center / cover;
+  background: url("/Images/treasure.jpg") no-repeat center center / cover;
 }
 
 h1 {
@@ -49,12 +49,12 @@ h1 {
 
 #cave1 {
   left: 20px;
-  background: url("/images/jungle-cave.webp") no-repeat center center / cover;
+  background: url("/Images/jungle-cave.webp") no-repeat center center / cover;
 }
 
 #cave2 {
   right: 20px;
-  background: url("/images/jungle-cave.webp") no-repeat center center / cover;
+  background: url("/Images/jungle-cave.webp") no-repeat center center / cover;
 }
 
 .item {
@@ -68,17 +68,17 @@ h1 {
 #key,
 #puzzle-key {
   left: 20px;
-  background: url("/images/key.jpg") no-repeat center center / cover;
+  background: url("/Images/key.jpg") no-repeat center center / cover;
 }
 
 #map,
 #puzzle-map {
   left: calc(50% - 40px);
-  background: url("/images/map.jpg") no-repeat center center / cover;
+  background: url("/Images/map.jpg") no-repeat center center / cover;
 }
 
 #compass,
 #puzzle-compass {
   right: 20px;
-  background: url("/images/compass.jpg") no-repeat center center / cover;
+  background: url("/Images/compass.jpg") no-repeat center center / cover;
 }
